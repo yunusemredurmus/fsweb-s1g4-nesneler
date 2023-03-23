@@ -13,14 +13,24 @@ const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı
 	
 	Örnek MenuElemaniOlustur('Cheeseburger', 8, 'Burgerler') şunu döndürmeli: {isim: 'Cheeseburger', fiyat: 8, kategori: 'Burgerler'}
 */
-
-
-function MenuElemaniOlustur(/*Kodlar buraya*/){
-	/*Kodlar buraya*/
+const burger1 = {isim:"", fiyat:"", kategori:""};
+function MenuElemaniOlustur(isim,fiyat,kategori) {
+	
+	burger1.isim = isim
+	burger1.fiyat= fiyat
+	burger1.kategori= kategori
+	return burger1;
 }
 
 
+console.log("Görev 1 A " , MenuElemaniOlustur('Cheeseburger', 8, 'Burgerler'));
+console.log("DENEME", burger1);
 
+
+//function MenuElemaniOlustur(isim, fiyat, kategori){    SORACAĞIM !!!!!!!!!!!!!
+   // return {isim, fiyat, kategori};
+    //}
+    //console.log(MenuElemaniOlustur("Cheeseburger",8, "Burgerler"));
 /*  Görev 1b (otomatik test yok): 
 	Fonksiyonu çağırın!
 	Aşağıdakileri uygulayarak MenuElemaniOlustur fonksiyonunuzu test edin:
@@ -30,6 +40,11 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 	
 	Örnek: MenuElemaniOlustur("Karışık Pizza",5,"Pizzalar") şunu döndürür: {isim:"Karışık Pizza",fiyat:5,kategori:"Pizzalar"}
 */
+MenuElemaniOlustur('Cheeseburger', 8, 'Burgerler');                    /////////////////// BAKKK !!!
+const pizzalar = MenuElemaniOlustur("Karışık Pizza",5,"Pizzalar");
+console.log(pizzalar);
+const corbalar = MenuElemaniOlustur("Corba",7,"Corbalar");
+console.log(corbalar);
 
 
 
@@ -46,15 +61,25 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 */
 
 
-const burger = {
+const burger = {                                           //soralım
 	isim: "Burger", 
 	fiyat: 18, 
-	kategori: "Öğle Yemeği", 
+	kategori: "Öğle Yemeği",
+	 indirim :function(kisi,newTutar) {
+	 if (kisi == "öğretmen" || kisi == "öğrenci" ) {
+		
+		newTutar = burger.fiyat *0.75;
+		 
+	 } else newTutar = burger.fiyat *0.90;
+	
+	  return newTutar;}	
 
-}
+	} 
+	console.log(burger.indirim("öğretmen"));
+	console.log(burger.indirim("öğrenci"));
+	console.log(burger.indirim("diğer"));
 
-
-
+	
 ///////////////Değerlendirmeler (MVP)///////////////////
 const degerlendirmeler = [
     {isim: "Nalan", puan: 5, geribildirim:"Mükemmel atmosfer ve mükemmel vegan seçenekleri!"},
@@ -71,6 +96,8 @@ const degerlendirmeler = [
 	Yukarıdaki degerlendirmeler dizisini(array) kullanarak:
 	1. Sadece Ahmet'in geribildirimini konsolda görüntüleyin - fonksiyona gerek yok
 */
+// 
+console.log("Görev 3 " , degerlendirmeler[5].geribildirim);
 
 
 
@@ -79,8 +106,8 @@ const degerlendirmeler = [
 	1. Bu geribildirimi Reyna'nın değerlendirmesine ekleyin - "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım"
 	2. degerlendirmeler dizisini konsolda görüntüleyerek çalışmanızı kontrol edin
 */
-
-
+degerlendirmeler[7].geribildirim= "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım";
+console.log("Görev 4 ", degerlendirmeler[7].geribildirim);
 
 /*  Görev 5: 
 	isim, puan, geribildirim'i içeren bir değerlendirme nesnesi oluşturup, yeni değerlendirmeyi mevcut dizinin(array) sonuna ekleyip sonuç dizisini döndüren bir fonksiyon tanımlayın. 
@@ -94,10 +121,13 @@ const degerlendirmeler = [
 */
 
 
-function DegerledirmeEkle(/*Kodlar buraya */){
-	/*Kodlar buraya */
-	
+function DegerledirmeEkle(degerlendirmeler,isim,puan,geribildirim){
+	const degerlendirme = { isim,puan,geribildirim };
+	degerlendirmeler.push(degerlendirme);
+	return degerlendirmeler
+
 }
+console.log("GÖREV 5 ", DegerledirmeEkle(degerlendirmeler, 'Hurşut', 2, 'Boktan yemekler!'))
 
 
 
@@ -112,10 +142,11 @@ function DegerledirmeEkle(/*Kodlar buraya */){
 */
 
 
-function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
-
-}
+function AnahtardanDegerlendirmeAl(degerlendirmeler, index) {
+    const degerlendirme = degerlendirmeler[index];
+    return degerlendirme.isim + " isimli kişi " + degerlendirme.puan + " puan verdi ve şunları yazdı: " + degerlendirme.geribildirim;
+  }
+console.log(AnahtardanDegerlendirmeAl(degerlendirmeler,0))
 
 
 
@@ -132,9 +163,11 @@ function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
 */
 
 
-function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
-} 
+function SonDegerlendirmeyiAl(degerlendirmeler) {
+    const sondegerlendirme = degerlendirmeler[degerlendirmeler.length-1];
+    return sondegerlendirme.isim + " isimli kişi " + sondegerlendirme.puan + " puan verdi ve şunları yazdı: " + sondegerlendirme.geribildirim;
+  }
+console.log(SonDegerlendirmeyiAl(degerlendirmeler))
 
 
 
